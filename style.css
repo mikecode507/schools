@@ -1,0 +1,22 @@
+body { font-family: sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; }
+.bio-section { background: #f4f4f4; padding: 15px; border-radius: 8px; margin: 20px 0; display: flex; align-items: center; gap: 20px; }
+footer { text-align: center; color: #666; font-size: 0.9em; }
+.galeria {
+  display: grid;
+  /* Definimos columnas automáticas y responsivas */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  /* Activamos el modo masonry nativo */
+  grid-template-rows: masonry; 
+  /* Fallback para navegadores antiguos: permite que el grid sea denso */
+  grid-auto-flow: dense; 
+  gap: 15px;
+  padding: 15px;
+}
+
+.galeria img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  /* Mantenemos proporción original */
+  object-fit: cover; 
+}

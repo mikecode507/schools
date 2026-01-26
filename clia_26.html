@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página de Ejemplo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- INICIO SECCIÓN: ENCABEZADO PRINCIPAL -->
+    <h1>Mi Mejor Retrato - Propuesta de Fotografía Escolar</h1>
+    <p><strong>Preparado para: CLIA 2026</strong></p>
+    <hr>
+    <!-- FIN SECCIÓN: ENCABEZADO PRINCIPAL -->
+
+    <!-- INICIO SECCIÓN: INFORMACIÓN GENERAL -->
+    <h2>INFORMACIÓN GENERAL</h2>
+    <p>
+        <strong>Fotógrafo:</strong> Mike Morelos<br>
+        <strong>Servicio:</strong> Fotografía de recuerdo para estudiantes<br>
+        <strong>Fecha:</strong> Jueves 20 de noviembre de 2025<br>
+        <strong>Lugar:</strong> En la escuela
+    </p>
+    <hr>
+    <!-- FIN SECCIÓN: INFORMACIÓN GENERAL -->
+    <!-- INICIO SECCIÓN: GALERIA -->
+    <h2>GALERIA</h2>
+    <div class="galeria" id="portafolio">Cargando portafolio...</div>
+  <!-- Las fotos aparecerán aquí -->
+</div>
+<script>
+  // CONFIGURACIÓN EXACTA
+  const BUCKET_URL = 'https://mmr-demo-bucket.s3.us-east-2.amazonaws.com';
+  const PREFIX = 'mmr_aws/i/portafolio/'; // <--- ASEGÚRATE QUE TERMINE EN /
+  const contenedor = document.getElementById('portafolio');
+
+  async function cargarFotos() {
+    try {
+      console.log("Intentando conectar a:", `${BUCKET_URL}/?list-type=2&prefix=${PREFIX}`);
+      
+      const response = await fetch(`${BUCKET_URL}/?list-type=2&prefix=${PREFIX}`);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Error de S3:", errorText);
+        contenedor.innerHTML = "Error de permisos (CORS o Policy). Revisa la consola.";
+        return;
+      }
+
+      const text = await response.text();
+      const xml = new window.DOMParser().parseFromString(text, "text/xml");
+      
+      // S3 puede usar namespaces, esta es la forma más segura de obtener los nodos
+      const nodes = xml.getElementsByTagName('Contents');
+      console.log("Total de archivos encontrados en el prefijo:", nodes.length);
+
+      if (nodes.length === 0) {
+        contenedor.innerHTML = `No hay archivos en <b>${PREFIX}</b>. <br><small>Verifica que las fotos no estén en minúsculas/mayúsculas diferentes.</small>`;
+        return;
+      }
+
+      let imagenesCargadas = 0;
+      contenedor.innerHTML = ""; // Limpiar mensaje de carga
+
+      for (let node of nodes) {
+        const key = node.getElementsByTagName('Key')[0].textContent;
+        console.log("Analizando archivo:", key);
+
+        // Filtramos: que no sea la carpeta misma y que sea imagen
+        if (key !== PREFIX && /\.(jpe?g|png|webp|gif|avif)$/i.test(key)) {
+          const img = document.createElement('img');
+          img.src = `${BUCKET_URL}/${key}`;
+          img.alt = "Portafolio";
+          img.loading = "lazy";
+          contenedor.appendChild(img);
+          imagenesCargadas++;
+        }
+      }
+
+      if (imagenesCargadas === 0) {
+        contenedor.innerHTML = "Se encontraron archivos, pero ninguno es una imagen válida (jpg, png, webp).";
+      }
+
+    } catch (e) {
+      console.error("Error crítico:", e);
+      contenedor.innerHTML = "Error al conectar con AWS. Revisa la consola.";
+    }
+  }
+
+  cargarFotos();
+</script>
+<!-- FIN SECCIÓN: GALERIA -->
+
+    <!-- INICIO SECCIÓN: LO QUE NOS HACE DIFERENTES -->
+    <h2>LO QUE NOS HACE DIFERENTES</h2>
+    
+    <h3>Sonrisas auténticas y diversión garantizada</h3>
+    <p>Ya no hacemos que los niños digan "cheeeese" frente a la cámara. Eso no funciona.</p>
+    <p>En lugar de eso, conversamos con ellos sobre lo que les gusta. Les hacemos reír de verdad con preguntas divertidas y bromas adaptadas a cada niño.</p>
+    <p><strong>Lo importante es que tu hijo(a) se va a divertir durante la sesión.</strong> Queremos que pase un buen rato mientras capturamos sus sonrisas genuinas.</p>
+    <p>Por eso te pedimos llenar un formulario donde nos cuentas sus gustos y pasatiempos. Así sabemos de qué hablar para conectar con ellos y hacerlos reír naturalmente.</p>
+
+    <h3>Un espacio diseñado para niños</h3>
+    <p>La sesión incluye utilería que los pequeños pueden tocar y explorar. Creamos un ambiente donde se sienten cómodos y libres de ser ellos mismos.</p>
+    <h3>¿Cómo logramos las sonrisas genuinas?</h3>
+    <p>Una estrategia simple: hacemos preguntas divertidas adaptadas a cada niño.</p>
+    <p>Por ejemplo, les preguntamos cuál es su postre favorito. Muchos dicen helado. Luego ¿Cuál es su almuerzo su favorito? Algunos responden espaguetis. Les digo en tono de broma: "¿Entonces te gustaría un helado de espagueti?"</p>
+    <p>Esa espontaneidad los hace reír naturalmente. Así capturamos esas carcajadas genuinas que se ven en las fotografías.</p>
+    <hr>
+    <!-- FIN SECCIÓN: LO QUE NOS HACE DIFERENTES -->
+
+    <!-- INICIO SECCIÓN: PAQUETES Y PRECIOS -->
+    <h2>PAQUETES Y PRECIOS</h2>
+
+    <h3>Paquete A - $24</h3>
+    <p><strong>6 fotos impresas y digitales</strong></p>
+    <p>Incluye:</p>
+    <ul>
+        <li>1 foto impresa 8 x 10</li>
+        <li>4 fotos impresas 4 x 6 del estudiante</li>
+        <li>1 foto impresa 4 x 6 del grupo del salón</li>
+        <li>Las mismas 6 fotos en galería online</li>
+    </ul>
+    <p><strong>Importante:</strong> Recibirás todas las fotos tomadas (mínimo 15) para que escojas cuáles quieres que retoquemos. Tienes 2 semanas para decidir.</p>
+    <p>Solo retocamos las fotos que selecciones. Las fotos no seleccionadas se entregan con marca de agua y en baja resolución.</p>
+
+    <h3>Paquete B - $4</h3>
+    <p><strong>5 fotos digitales (no se entregan fotos impresas)</strong></p>
+    <p>Incluye:</p>
+    <ul>
+        <li>4 fotos del estudiante</li>
+        <li>1 foto del grupo del salón</li>
+        <li>Todas en formato digital</li>
+    </ul>
+
+    <h3>Fotos adicionales</h3>
+    <p><strong>$4 por cada foto extra</strong> que quieras retocar</p>
+    <hr>
+    <!-- FIN SECCIÓN: PAQUETES Y PRECIOS -->
+
+    <!-- INICIO SECCIÓN: CÓMO FUNCIONA EL SERVICIO -->
+    <h2>CÓMO FUNCIONA EL SERVICIO</h2>
+
+    <h3>Paso 1: Reserva tu espacio</h3>
+    <ul>
+        <li>Completa el formulario en nuestra página web</li>
+        <li>Paga un abono de $12 para reservar la fecha</li>
+        <li>Te contactaremos por WhatsApp para coordinar el pago (aceptamos Yappy o transferencia)</li>
+        <li>El pago se hace directamente al fotógrafo</li>
+    </ul>
+
+    <h3>Paso 2: Día de la sesión</h3>
+    <ul>
+        <li>Tomaremos mínimo 15 fotos por estudiante</li>
+        <li>La sesión dura 5 minutos por niño</li>
+        <li>Tu hijo(a) se divertirá mientras capturamos sus mejores sonrisas</li>
+    </ul>
+
+    <h3>Paso 3: Recibe tu galería</h3>
+    <ul>
+        <li>Te enviamos la galería por WhatsApp después de completar el pago</li>
+        <li>Cada familia recibe su galería individual y privada</li>
+    </ul>
+
+    <h3>Paso 4: Selecciona tus fotos favoritas</h3>
+    <ul>
+        <li>Tienes 2 semanas para escoger las fotos que quieres retocar</li>
+        <li>Si no escoges en ese tiempo, nosotros seleccionamos las mejores y completamos el servicio</li>
+        <li>Si pediste fotos adicionales, cada una cuesta $4</li>
+    </ul>
+
+    <h3>Paso 5: Entrega final</h3>
+    <ul>
+        <li>Recibes las fotos impresas 2 semanas después de hacer tu selección</li>
+        <li>Tu galería digital estará disponible por 9 meses</li>
+        <li>El enlace es privado pero puedes compartirlo con tu familia (no necesita contraseña)</li>
+        <li>Después de 9 meses, los archivos se eliminan y no guardamos copia</li>
+    </ul>
+    <hr>
+    <!-- FIN SECCIÓN: CÓMO FUNCIONA EL SERVICIO -->
+
+    <!-- INICIO SECCIÓN: SOBRE EL FOTÓGRAFO -->
+        <div id="bio-placeholder"></div>
+    <hr>
+    <!-- FIN SECCIÓN: SOBRE EL FOTÓGRAFO -->
+
+    <!-- INICIO SECCIÓN: RESERVA TU ESPACIO -->
+    <h2>RESERVA TU ESPACIO</h2>
+    <p>Si quieres reservar el servicio, entra al enlace que aparece debajo de este folleto y completa el formulario.</p>
+    <!-- FIN SECCIÓN: RESERVA TU ESPACIO -->
+
+     <!-- INICIO SECCIÓN: CTA call to action -->
+    <h2>Call to action</h2>
+    <p>Aquí va un formulario de contacto.</p>
+    <!-- FIN SECCIÓN: CTA call to action -->
+  
+    <div id="contact-placeholder"></div>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        function cargarComponente(id, url) {
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById(id).innerHTML = data;
+                })
+                .catch(err => console.error("Error cargando " + url, err));
+        }
+
+        // Llamamos a las funciones para cargar los archivos externos
+        cargarComponente('bio-placeholder', 'bio.html');
+        cargarComponente('footer-placeholder', 'footer.html');
+        cargarComponente('contact-placeholder', 'contact.html');
+    </script>
+</body>
+</html>
