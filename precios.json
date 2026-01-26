@@ -1,0 +1,44 @@
+{
+  "propuesta": "Fotografía Escolar Standard",
+  "moneda": "USD",
+  "paquetes": [
+    {
+      "id": "paquete_a",
+      "nombre": "Paquete A",
+      "precio": 36,
+      "descripcion": "6 fotos impresas y en digital",
+      "entregables": {
+        "impresos": [
+          {"cantidad": 1, "tamano": "8x12", "detalle": "Foto grande del estudiante"},
+          {"cantidad": 4, "tamano": "4x6", "detalle": "Fotos del estudiante"},
+          {"cantidad": 1, "tamano": "4x6", "detalle": "Foto de grupo del salón"}
+        ],
+        "digitales": {
+          "plataforma": "Galería online",
+          "cantidad_total": 6
+        }
+      }
+    },
+    {
+      "id": "paquete_b",
+      "nombre": "Paquete B",
+      "precio": 24,
+      "descripcion": "4 fotos únicamente en galería online",
+      "entregables": {
+        "impresos": [],
+        "digitales": {
+          "plataforma": "Galería online",
+          "cantidad_total": 5,
+          "detalle": [
+            "3 fotos del estudiante",
+            "1 foto del grupo del salón"
+          ]
+        }
+      }
+    }
+  ],
+  "configuracion_entrega": {
+    "lugar": "Panamá",
+    "tiempo_estimado": "Depende de la fecha de la sesión"
+  }
+}
