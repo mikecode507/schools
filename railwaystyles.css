@@ -1,0 +1,266 @@
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales de Railway */
+    --background-dark: #0a0a0a;
+    --card-background: #141414;
+    --card-border: #1f1f1f;
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1a1;
+    --accent-purple: #8b5cf6;
+    --accent-hover: #7c3aed;
+    --feature-text: #d1d1d1;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 2rem 1rem;
+}
+
+/* Contenedor principal */
+.pricing-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Grid de tarjetas */
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem 0;
+}
+
+/* Tarjeta individual */
+.pricing-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-4px);
+    border-color: #2a2a2a;
+}
+
+/* Tarjeta destacada (Pro) */
+.pricing-card--featured {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 0 1px var(--accent-purple);
+}
+
+.pricing-card--featured:hover {
+    border-color: var(--accent-hover);
+    box-shadow: 0 0 0 1px var(--accent-hover);
+}
+
+/* Header de la tarjeta */
+.card-header {
+    margin-bottom: 2rem;
+}
+
+.plan-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.price-amount {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-primary);
+}
+
+.price-period {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.plan-description {
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Lista de características */
+.features-list {
+    list-style: none;
+    flex-grow: 1;
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    font-size: 0.9375rem;
+    color: var(--feature-text);
+    padding: 0.75rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    line-height: 1.5;
+}
+
+.feature-item::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-purple);
+    font-weight: 600;
+}
+
+.feature-item:not(:last-child) {
+    border-bottom: 1px solid var(--card-border);
+}
+
+/* Footer de la tarjeta */
+.card-footer {
+    margin-top: auto;
+}
+
+.cta-button {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background-color: var(--text-primary);
+    color: var(--background-dark);
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+.cta-button:hover {
+    background-color: var(--text-secondary);
+    transform: translateY(-1px);
+}
+
+.pricing-card--featured .cta-button {
+    background-color: var(--accent-purple);
+    color: var(--text-primary);
+}
+
+.pricing-card--featured .cta-button:hover {
+    background-color: var(--accent-hover);
+}
+
+/* Responsive Design */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .pricing-cards {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.25rem;
+    }
+    
+    .pricing-card {
+        padding: 1.75rem;
+    }
+    
+    .price-amount {
+        font-size: 2.5rem;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+    
+    .pricing-cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .pricing-card {
+        padding: 1.5rem;
+    }
+    
+    .plan-name {
+        font-size: 1.375rem;
+    }
+    
+    .price-amount {
+        font-size: 2.25rem;
+    }
+    
+    .plan-description {
+        font-size: 0.875rem;
+    }
+    
+    .feature-item {
+        font-size: 0.875rem;
+        padding: 0.625rem 0;
+        padding-left: 1.25rem;
+    }
+    
+    .cta-button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Mobile pequeño */
+@media (max-width: 480px) {
+    body {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .pricing-card {
+        padding: 1.25rem;
+    }
+    
+    .card-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .plan-name {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .price-amount {
+        font-size: 2rem;
+    }
+    
+    .price-period {
+        font-size: 0.8125rem;
+    }
+    
+    .features-list {
+        margin-bottom: 1.5rem;
+    }
+}
+
+/* Modo oscuro adicional (si el sistema lo prefiere) */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: var(--background-dark);
+    }
+}
