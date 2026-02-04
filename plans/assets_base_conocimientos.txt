@@ -1,0 +1,3 @@
+imágenes
+800 px wide
+200 kb
