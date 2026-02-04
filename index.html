@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>26 Sabis</title>
-    <link rel="stylesheet" href="testing-style.css">
+    <link rel="stylesheet" href=style.css">
     <link rel="icon" href="data:,">
 </head>
+
 <body>
 
     <!-- INICIO SECCIÓN: ENCABEZADO PRINCIPAL -->
@@ -14,86 +16,34 @@
     <p><strong>Preparado para: Sabis 2026</strong></p>
     <!-- FIN SECCIÓN: ENCABEZADO PRINCIPAL -->
     <!-- INICIO SECCIÓN: GALERIA -->
-    <div class="galeria" id="portafolio">Cargando portafolio...</div>
-  <!-- Las fotos aparecerán aquí -->
-<script>
-  // CONFIGURACIÓN EXACTA
-  const BUCKET_URL = 'https://mmr-demo-bucket.s3.us-east-2.amazonaws.com';
-  const PREFIX = 'mmr_aws/i/portafolio/'; // <--- ASEGÚRATE QUE TERMINE EN /
-  const contenedor = document.getElementById('portafolio');
+    <div class="galeria" id="portafolio1">Cargando portafolio 1...</div>
 
-  async function cargarFotos() {
-    try {
-      console.log("Intentando conectar a:", `${BUCKET_URL}/?list-type=2&prefix=${PREFIX}`);
-      
-      const response = await fetch(`${BUCKET_URL}/?list-type=2&prefix=${PREFIX}`);
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Error de S3:", errorText);
-        contenedor.innerHTML = "Error de permisos (CORS o Policy). Revisa la consola.";
-        return;
-      }
+    <!-- Las fotos aparecerán aquí -->
 
-      const text = await response.text();
-      const xml = new window.DOMParser().parseFromString(text, "text/xml");
-      
-      // S3 puede usar namespaces, esta es la forma más segura de obtener los nodos
-      const nodes = xml.getElementsByTagName('Contents');
-      console.log("Total de archivos encontrados en el prefijo:", nodes.length);
-
-      if (nodes.length === 0) {
-        contenedor.innerHTML = `No hay archivos en <b>${PREFIX}</b>. <br><small>Verifica que las fotos no estén en minúsculas/mayúsculas diferentes.</small>`;
-        return;
-      }
-
-      let imagenesCargadas = 0;
-      contenedor.innerHTML = ""; // Limpiar mensaje de carga
-
-      for (let node of nodes) {
-        const key = node.getElementsByTagName('Key')[0].textContent;
-        console.log("Analizando archivo:", key);
-
-        // Filtramos: que no sea la carpeta misma y que sea imagen
-        if (key !== PREFIX && /\.(jpe?g|png|webp|gif|avif)$/i.test(key)) {
-          const img = document.createElement('img');
-          img.src = `${BUCKET_URL}/${key}`;
-          img.alt = "Portafolio";
-          img.loading = "lazy";
-          contenedor.appendChild(img);
-          imagenesCargadas++;
-        }
-      }
-
-      if (imagenesCargadas === 0) {
-        contenedor.innerHTML = "Se encontraron archivos, pero ninguno es una imagen válida (jpg, png, webp).";
-      }
-
-    } catch (e) {
-      console.error("Error crítico:", e);
-      contenedor.innerHTML = "Error al conectar con AWS. Revisa la consola.";
-    }
-  }
-
-  cargarFotos();
-</script>
-<!-- FIN SECCIÓN: GALERIA -->
+    <!-- FIN SECCIÓN: GALERIA -->
 
     <!-- INICIO SECCIÓN: LO QUE NOS HACE DIFERENTES -->
     <h2>LO QUE NOS HACE DIFERENTES</h2>
-    
+
     <h3>Sonrisas auténticas y diversión garantizada</h3>
     <p>Ya no hacemos que los niños digan "cheeeese" frente a la cámara. Eso no funciona.</p>
-    <p>En lugar de eso, conversamos con ellos sobre lo que les gusta. Les hacemos reír de verdad con preguntas divertidas y bromas adaptadas a cada niño.</p>
-    <p><strong>Lo importante es que tu hijo(a) se va a divertir durante la sesión.</strong> Queremos que pase un buen rato mientras capturamos sus sonrisas genuinas.</p>
-    <p>Por eso te pedimos llenar un formulario donde nos cuentas sus gustos y pasatiempos. Así sabemos de qué hablar para conectar con ellos y hacerlos reír naturalmente.</p>
+    <p>En lugar de eso, conversamos con ellos sobre lo que les gusta. Les hacemos reír de verdad con preguntas
+        divertidas y bromas adaptadas a cada niño.</p>
+    <p><strong>Lo importante es que tu hijo(a) se va a divertir durante la sesión.</strong> Queremos que pase un buen
+        rato mientras capturamos sus sonrisas genuinas.</p>
+    <p>Por eso te pedimos llenar un formulario donde nos cuentas sus gustos y pasatiempos. Así sabemos de qué hablar
+        para conectar con ellos y hacerlos reír naturalmente.</p>
 
     <h3>Un espacio diseñado para niños</h3>
-    <p>La sesión incluye utilería que los pequeños pueden tocar y explorar. Creamos un ambiente donde se sienten cómodos y libres de ser ellos mismos.</p>
+    <p>La sesión incluye utilería que los pequeños pueden tocar y explorar. Creamos un ambiente donde se sienten cómodos
+        y libres de ser ellos mismos.</p>
     <h3>¿Cómo logramos las sonrisas genuinas?</h3>
     <p>Una estrategia simple: hacemos preguntas divertidas adaptadas a cada niño.</p>
-    <p>Por ejemplo, les preguntamos cuál es su postre favorito. Muchos dicen helado. Luego ¿Cuál es su almuerzo su favorito? Algunos responden espaguetis. Les digo en tono de broma: "¿Entonces te gustaría un helado de espagueti?"</p>
-    <p>Esa espontaneidad los hace reír naturalmente. Así capturamos esas carcajadas genuinas que se ven en las fotografías.</p>
+    <p>Por ejemplo, les preguntamos cuál es su postre favorito. Muchos dicen helado. Luego ¿Cuál es su almuerzo su
+        favorito? Algunos responden espaguetis. Les digo en tono de broma: "¿Entonces te gustaría un helado de
+        espagueti?"</p>
+    <p>Esa espontaneidad los hace reír naturalmente. Así capturamos esas carcajadas genuinas que se ven en las
+        fotografías.</p>
     <hr>
     <!-- FIN SECCIÓN: LO QUE NOS HACE DIFERENTES -->
 
@@ -110,7 +60,7 @@
                 data.paquetes.forEach(pkg => {
                     html += `<h3>${pkg.nombre} - $${pkg.precio}</h3>`;
                     html += `<p><strong>${pkg.descripcion}</strong></p>`;
-                    
+
                     let items = [];
                     if (pkg.entregables.impresos) {
                         pkg.entregables.impresos.forEach(imp => {
@@ -125,7 +75,7 @@
                             items.push(`${dig.cantidad_total} fotos en ${dig.plataforma}`);
                         }
                     }
-                    
+
                     if (items.length > 0) {
                         html += '<p>Incluye:</p><ul>' + items.map(i => `<li>${i}</li>`).join('') + '</ul>';
                     }
@@ -140,7 +90,7 @@
 
     <hr>
     <!-- FIN SECCIÓN: PAQUETES Y PRECIOS -->
-
+    <div class="galeria" id="portafolio2">Cargando portafolio 2...</div>
     <!-- INICIO SECCIÓN: CÓMO FUNCIONA EL SERVICIO -->
     <h2>CÓMO FUNCIONA EL SERVICIO</h2>
 
@@ -174,7 +124,7 @@
     <!-- FIN SECCIÓN: CÓMO FUNCIONA EL SERVICIO -->
     <!-- INICIO SECCIÓN: SOBRE EL FOTÓGRAFO -->
     <hr>
-          <div id="bio-placeholder"></div>
+    <div id="bio-placeholder"></div>
     <hr>
     <!-- FIN SECCIÓN: SOBRE EL FOTÓGRAFO -->
     <!-- INICIO SECCIÓN: RESERVA TU ESPACIO -->
@@ -182,65 +132,71 @@
     <p>Si quieres reservar el servicio completa el formulario.</p>
     <div class="form-content">
         <form id="photoForm">
-                <!-- Campos del formulario -->
-                <input type="hidden" id="idEscuela" name="idEscuela" value="clia">
+            <!-- Campos del formulario -->
+            <input type="hidden" id="idEscuela" name="idEscuela" value="clia">
 
-                <div class="form-group">
-                    <label for="email">Email<span class="required">*</span></label>
-                    <input type="email" id="email" name="email" autocomplete="email" required>
-                </div>
+            <div class="form-group">
+                <label for="email">Email<span class="required">*</span></label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="nombre">Sólo tu nombre (sin apellido)<span class="required">*</span></label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
+            <div class="form-group">
+                <label for="nombre">Sólo tu nombre (sin apellido)<span class="required">*</span></label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
 
-                <div class="form-group">
-                    <label for="celular">Tu número celular para escribirte al WhatsApp.<span
-                            class="required">*</span></label>
-                    <div style="display: flex; gap: 8px; align-items: flex-start;">
-                        <div style="flex: 0 0 auto;">
-                           
-                            <div class="radio-group" style="margin-top: 0;">
-                                <label class="radio-option" style="margin-bottom: 4px;"><input type="radio" name="codigoPais" value="+507" checked required> Panamá</label>
-                                <label class="radio-option"><input type="radio" name="codigoPais" value="otro"> Otro país</label>
-                            </div>
-                        </div>
-                        <div style="flex: 1;">
-                            <div id="codigoOtroContainer" style="display: none; margin-bottom: 4px;">
-                                <input type="text" id="codigoOtro" placeholder="+XXX" style="width: 80px; padding: 8px; border: 1px solid #dadce0; border-radius: 4px; font-size: 14px;">
-                            </div>
-                            <input type="text" id="celular" name="celular" placeholder="Número celular" required style="width: 100%;">
-                            <input type="text" id="celularOtro" name="celularOtro" placeholder="Número completo con código de país" style="width: 100%; display: none; margin-top: 8px;">
+            <div class="form-group">
+                <label for="celular">Tu número celular para escribirte al WhatsApp.<span
+                        class="required">*</span></label>
+                <div style="display: flex; gap: 8px; align-items: flex-start;">
+                    <div style="flex: 0 0 auto;">
+
+                        <div class="radio-group" style="margin-top: 0;">
+                            <label class="radio-option" style="margin-bottom: 4px;"><input type="radio"
+                                    name="codigoPais" value="+507" checked required> Panamá</label>
+                            <label class="radio-option"><input type="radio" name="codigoPais" value="otro"> Otro
+                                país</label>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Quiero el Paquete<span class="required">*</span></label>
-                    <div class="radio-group">
-                        <label class="radio-option"><input type="radio" name="paquete" value="paqueteA" required>
-                            Paquete A (Impresas + Digital) $36</label>
-                        <label class="radio-option"><input type="radio" name="paquete" value="paqueteB"> Paquete B (Sólo
-                            Digital) $24</label>
+                    <div style="flex: 1;">
+                        <div id="codigoOtroContainer" style="display: none; margin-bottom: 4px;">
+                            <input type="text" id="codigoOtro" placeholder="+XXX"
+                                style="width: 80px; padding: 8px; border: 1px solid #dadce0; border-radius: 4px; font-size: 14px;">
+                        </div>
+                        <input type="text" id="celular" name="celular" placeholder="Número celular" required
+                            style="width: 100%;">
+                        <input type="text" id="celularOtro" name="celularOtro"
+                            placeholder="Número completo con código de país"
+                            style="width: 100%; display: none; margin-top: 8px;">
                     </div>
                 </div>
+            </div>
 
-                <div class="form-group">
-                    <label for="nombreEstudiante">Nombre del estudiante<span class="required">*</span></label>
-                    <input type="text" id="nombreEstudiante" name="nombreEstudiante" required>
+            <div class="form-group">
+                <label>Quiero el Paquete<span class="required">*</span></label>
+                <div class="radio-group">
+                    <label class="radio-option"><input type="radio" name="paquete" value="paqueteA" required>
+                        Paquete A (Impresas + Digital) $36</label>
+                    <label class="radio-option"><input type="radio" name="paquete" value="paqueteB"> Paquete B (Sólo
+                        Digital) $24</label>
                 </div>
+            </div>
 
-                <div style="margin-top: 32px;">
-                    <button type="submit" id="btnEnviar" class="submit-btn">Enviar Formulario</button>
-                    <div id="mensajeEstado"></div>
-                </div>
-            </form>
+            <div class="form-group">
+                <label for="nombreEstudiante">Nombre del estudiante<span class="required">*</span></label>
+                <input type="text" id="nombreEstudiante" name="nombreEstudiante" required>
+            </div>
+
+            <div style="margin-top: 32px;">
+                <button type="submit" id="btnEnviar" class="submit-btn">Enviar Formulario</button>
+                <div id="mensajeEstado"></div>
+            </div>
+        </form>
     </div>
     <!-- FIN SECCIÓN: RESERVA TU ESPACIO -->
     <div id="contact-placeholder"></div>
-<div id="footer-placeholder"></div>
-<script>
+    <div id="footer-placeholder"></div>
+    <script>
         // Lógica para mostrar "Otro" en salón
         const salonOtroTexto = document.getElementById('salonOtroTexto');
         document.querySelectorAll('input[name="salon"]').forEach(radio => {
@@ -295,10 +251,10 @@
                 numeroCompleto = data.celularOtro;
             }
 
-            
+
         });
-</script>
-<script>
+    </script>
+    <script>
         function cargarComponente(id, url) {
             fetch(url)
                 .then(response => response.text())
@@ -312,6 +268,70 @@
         cargarComponente('bio-placeholder', '/components/bio.html');
         cargarComponente('footer-placeholder', '/components/footer.html');
         cargarComponente('contact-placeholder', '/components/contact.html');
-</script>
+    </script>
+    <script>
+        // Función modular para cargar galerías
+        async function loadGallery(containerId, folderPath) {
+            const BUCKET_URL = 'https://mmr-demo-bucket.s3.us-east-2.amazonaws.com';
+            const PREFIX = folderPath;
+            const contenedor = document.getElementById(containerId);
+
+            try {
+                console.log("Intentando conectar a:", `${BUCKET_URL}/?list-type=2&prefix=${PREFIX}`);
+
+                const response = await fetch(`${BUCKET_URL}/?list-type=2&prefix=${PREFIX}`);
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error("Error de S3:", errorText);
+                    contenedor.innerHTML = "Error de permisos (CORS o Policy). Revisa la consola.";
+                    return;
+                }
+
+                const text = await response.text();
+                const xml = new window.DOMParser().parseFromString(text, "text/xml");
+
+                // S3 puede usar namespaces, esta es la forma más segura de obtener los nodos
+                const nodes = xml.getElementsByTagName('Contents');
+                console.log("Total de archivos encontrados en el prefijo:", nodes.length);
+
+                if (nodes.length === 0) {
+                    contenedor.innerHTML = `No hay archivos en <b>${PREFIX}</b>. <br><small>Verifica que las fotos no estén en minúsculas/mayúsculas diferentes.</small>`;
+                    return;
+                }
+
+                let imagenesCargadas = 0;
+                contenedor.innerHTML = ""; // Limpiar mensaje de carga
+
+                for (let node of nodes) {
+                    const key = node.getElementsByTagName('Key')[0].textContent;
+                    console.log("Analizando archivo:", key);
+
+                    // Filtramos: que no sea la carpeta misma y que sea imagen
+                    if (key !== PREFIX && /\.(jpe?g|png|webp|gif|avif)$/i.test(key)) {
+                        const img = document.createElement('img');
+                        img.src = `${BUCKET_URL}/${key}`;
+                        img.alt = "Portafolio";
+                        img.loading = "lazy";
+                        contenedor.appendChild(img);
+                        imagenesCargadas++;
+                    }
+                }
+
+                if (imagenesCargadas === 0) {
+                    contenedor.innerHTML = "Se encontraron archivos, pero ninguno es una imagen válida (jpg, png, webp).";
+                }
+
+            } catch (e) {
+                console.error("Error crítico:", e);
+                contenedor.innerHTML = "Error al conectar con AWS. Revisa la consola.";
+            }
+        }
+
+        // Llamadas a la función modular
+        loadGallery('portafolio1', 'mmr_aws/i/portafolio1/');
+        loadGallery('portafolio2', 'mmr_aws/i/portafolio2/');
+    </script>
 </body>
+
 </html>
