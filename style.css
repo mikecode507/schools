@@ -2,7 +2,8 @@
     --bg-color: #0b0d0e;
     --text-primary: #ffffff;
     --text-secondary: #a1a1aa;
-    --accent-color: #d946ef; /* Railway-like pink/purple */
+    --accent-color: #d946ef;
+    /* Railway-like pink/purple */
     --accent-gradient: linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%);
     --border-color: #27272a;
     --card-bg: #18181b;
@@ -22,7 +23,9 @@ body {
 }
 
 /* Typography */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     font-weight: 700;
     letter-spacing: -0.02em;
     margin-top: 2.5rem;
@@ -39,8 +42,8 @@ h1 {
 
 h2 {
     font-size: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem;
     color: var(--text-primary);
 }
 
@@ -108,7 +111,7 @@ li {
         padding: 0;
         margin: 0 -1rem;
     }
-    
+
     .galeria img {
         width: 100vw;
         max-width: 100%;

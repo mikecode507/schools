@@ -5,8 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>26 Sabis</title>
-    <link rel="stylesheet" href=style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:,">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6H4H52RL0T"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-6H4H52RL0T');
+    </script>
 </head>
 
 <body>
@@ -44,12 +53,10 @@
         espagueti?"</p>
     <p>Esa espontaneidad los hace reír naturalmente. Así capturamos esas carcajadas genuinas que se ven en las
         fotografías.</p>
-    <hr>
     <!-- FIN SECCIÓN: LO QUE NOS HACE DIFERENTES -->
 
     <!-- INICIO SECCIÓN: PAQUETES Y PRECIOS -->
     <h2>PAQUETES Y PRECIOS</h2>
-
     <div id="precios-container">Cargando precios...</div>
     <script>
         fetch('precios.json')
@@ -87,8 +94,6 @@
                 document.getElementById('precios-container').innerHTML = 'Error cargando precios.';
             });
     </script>
-
-    <hr>
     <!-- FIN SECCIÓN: PAQUETES Y PRECIOS -->
     <div class="galeria" id="portafolio2">Cargando portafolio 2...</div>
     <!-- INICIO SECCIÓN: CÓMO FUNCIONA EL SERVICIO -->
@@ -123,9 +128,9 @@
     </ul>
     <!-- FIN SECCIÓN: CÓMO FUNCIONA EL SERVICIO -->
     <!-- INICIO SECCIÓN: SOBRE EL FOTÓGRAFO -->
-    <hr>
+
     <div id="bio-placeholder"></div>
-    <hr>
+
     <!-- FIN SECCIÓN: SOBRE EL FOTÓGRAFO -->
     <!-- INICIO SECCIÓN: RESERVA TU ESPACIO -->
     <h2>RESERVA TU ESPACIO</h2>
@@ -133,7 +138,7 @@
     <div class="form-content">
         <form id="photoForm">
             <!-- Campos del formulario -->
-            <input type="hidden" id="idEscuela" name="idEscuela" value="clia">
+            <input type="hidden" id="idEscuela" name="idEscuela" value="sabis_26">
 
             <div class="form-group">
                 <label for="email">Email<span class="required">*</span></label>
@@ -272,7 +277,7 @@
     <script>
         // Función modular para cargar galerías
         async function loadGallery(containerId, folderPath) {
-            const BUCKET_URL = 'https://mmr-demo-bucket.s3.us-east-2.amazonaws.com';
+            const BUCKET_URL = 'https://mmr-be-web.s3.us-east-1.amazonaws.com';
             const PREFIX = folderPath;
             const contenedor = document.getElementById(containerId);
 
@@ -329,8 +334,8 @@
         }
 
         // Llamadas a la función modular
-        loadGallery('portafolio1', 'mmr_aws/i/portafolio1/');
-        loadGallery('portafolio2', 'mmr_aws/i/portafolio2/');
+        loadGallery('portafolio1', 'i/portafolio1/');
+        loadGallery('portafolio2', 'i/portafolio2/');
     </script>
 </body>
 
